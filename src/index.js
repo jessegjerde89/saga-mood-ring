@@ -16,7 +16,7 @@ import axios from 'axios'
 function* rootSaga() {
     yield takeEvery('FETCH_IMAGES', fetchImages)
     yield takeEvery('FETCH_TAGS', fetchTags)
-    yield takeEvery('ADD_TAGS', addTags)
+    // yield takeEvery('ADD_TAGS', addTags)
     
 }
 
@@ -42,14 +42,15 @@ function* fetchTags() {
 
 }
 
-function* fetchTags() { 
-    try {
-        yield axios.post('api/tag', action.payload); 
-        yield put({type : 'FETCH_TAGS'})
-        } catch(error) {
-            console.log(error)
-    }
-}
+// function* addTags() { 
+//     try {
+//         yield axios.post('api/tag', action.payload); 
+//         const t
+//         yield put({type : 'SET_TAGS', })
+//         } catch(error) {
+//             console.log(error)
+//     }
+// }
 
 
 // Create sagaMiddleware

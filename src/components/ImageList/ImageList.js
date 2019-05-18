@@ -9,9 +9,14 @@ class ImageList extends Component {
 
 state = {
     image_url: '', 
-    tag: 0
+    tag: 0, 
+    id: 0,
+    image_spot : 0
 
 }
+
+
+
 
 componentDidMount() {
     this.props.dispatch({ type: 'FETCH_IMAGES'})
@@ -19,8 +24,46 @@ componentDidMount() {
    
 } 
 
+handleAdd = () => {
+    console.log(this.state)
+    this.props.dispatch({type: 'CHANGE_COUNT', payload: this.state.id})
+}
+
+handleNext = () => {
+    if (this.state.image_spot === 4) {
+        this.setState({ 
+            image_spot: 0
+        })
+    } else {
+
+    this.setState({ 
+        image_spot : (this.state.image_spot + 1)
+    })
+}
+    console.log(this.state.image_spot)
+}
+
+
+handlePrevious = () => {
+    if (this.state.image_spot === 0){
+        this.setState({
+            image_spot : 5
+        })
+    } else {
+    this.setState({ 
+        image_spot : (this.state.image_spot - 1)
+    })
+}
+    console.log(this.state.image_spot)
+}
+
 
     render() {
+    
+    let imageName = this.props.images.map((image) => {
+            return  image = image.title
+})
+
         
     let imagePath =  this.props.images.map((image) => {
                      return  image = image.path
@@ -34,12 +77,22 @@ componentDidMount() {
         console.log(imagePath)
         return (
                 <div>
-                   <img src = {imagePath} />
+                    <h1>{imageName[this.state.image_spot]}</h1>
+                   <img src = {imagePath[this.state.image_spot]} />
                    <p> {tagName} </p>
-                   <pre> {JSON.stringify(imagePath)}  </pre>
+                  
 
-                   <button>Previous</button>
-                   <button> Next</button>
+                   <button onClick= {this.handlePrevious}>Previous</button>
+                   <button onClick={this.handleNext}> Next</button>
+                   <select value={this.state.id} >
+                       <option disabled value="0">Pick an state</option>
+                       {this.props.tags.map(tag => {
+                            return (
+                       <option>{tag.name}</option>
+                            )})}
+                   
+                   </select>
+                   <button onClick={this.handleAdd}> Add Tag </button>
                 </div>
         )
     }
