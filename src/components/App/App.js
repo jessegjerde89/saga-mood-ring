@@ -11,11 +11,10 @@ class App extends Component {
 
         <h1>The Mood Ring </h1>
         
-      
-      <button>Previous</button>
+     
       {/* <ImageList /> */}
       <ImageList />
-      <button> Next</button>
+     
       
       </div>
     );
