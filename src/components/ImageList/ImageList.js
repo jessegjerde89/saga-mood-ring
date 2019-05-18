@@ -37,6 +37,9 @@ componentDidMount() {
                    <img src = {imagePath} />
                    <p> {tagName} </p>
                    <pre> {JSON.stringify(imagePath)}  </pre>
+
+                   <button>Previous</button>
+                   <button> Next</button>
                 </div>
         )
     }
