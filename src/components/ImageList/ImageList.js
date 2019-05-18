@@ -1,6 +1,7 @@
 import React, {Component} from 'react'; 
 import { connect } from 'react-redux'; 
 import axios from 'axios';
+import './ImageList.css'
 
 
 
@@ -13,7 +14,8 @@ state = {
 }
 
 componentDidMount() {
-    this.props.dispatch({ type: 'FETCH_IMAGES', payload: this.state})
+    this.props.dispatch({ type: 'FETCH_IMAGES'})
+    this.props.dispatch({ type: 'FETCH_TAGS'})
    
 } 
 
@@ -21,13 +23,20 @@ componentDidMount() {
     render() {
         
     let imagePath =  this.props.images.map((image) => {
-                     return  <div key={image.id} image = {image.path}  />
-            }
-                )
-        console.log(this.props.images)
+                     return  image = image.path
+            })
+
+    let tagName = this.props.tags.map((tag) => {
+                    return tag = tag.name
+    })
+
+    
+        console.log(imagePath)
         return (
                 <div>
-                   {JSON.stringify({imagePath})}
+                   <img src = {imagePath} />
+                   <p> {tagName} </p>
+                   <pre> {JSON.stringify(imagePath)}  </pre>
                 </div>
         )
     }
@@ -36,7 +45,10 @@ componentDidMount() {
 
 
 const mapRedux = (reduxState) => {
-    return { images : reduxState.images }
+    return { 
+        images : reduxState.images,
+        tags : reduxState.tags
+    }
 }
 
 export default connect(mapRedux)(ImageList); 

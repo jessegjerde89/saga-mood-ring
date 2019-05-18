@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 // import ImageList from '../ImageList/ImageList'
-import ImageList from '../Images/Images'
+import ImageList from '../ImageList/ImageList'
 
 class App extends Component {
   // Renders the entire app on the DOM
