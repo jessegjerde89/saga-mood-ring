@@ -15,6 +15,7 @@ state = {
 
 componentDidMount() {
     this.props.dispatch({ type: 'FETCH_IMAGES'})
+    this.props.dispatch({ type: 'FETCH_TAGS'})
    
 } 
 
@@ -23,12 +24,19 @@ componentDidMount() {
         
     let imagePath =  this.props.images.map((image) => {
                      return  image = image.path
-            }
-                )
+            })
+
+    let tagName = this.props.tags.map((tag) => {
+                    return tag = tag.name
+    })
+
+    
         console.log(imagePath)
         return (
                 <div>
-                   <img src ={imagePath[4]} />
+                   <img src = {imagePath} />
+                   <p> {tagName} </p>
+                   <pre> {JSON.stringify(imagePath)}  </pre>
                 </div>
         )
     }
@@ -37,7 +45,10 @@ componentDidMount() {
 
 
 const mapRedux = (reduxState) => {
-    return { images : reduxState.images }
+    return { 
+        images : reduxState.images,
+        tags : reduxState.tags
+    }
 }
 
 export default connect(mapRedux)(ImageList); 
