@@ -9,11 +9,32 @@ import { Provider } from 'react-redux';
 import logger from 'redux-logger';
 // Import saga middleware
 import createSagaMiddleware from 'redux-saga';
+import { takeEvery, put } from 'redux-saga/effects'
+import axios from 'axios'
 
 // Create the rootSaga generator function
 function* rootSaga() {
+    yield takeEvery('FETCH_IMAGES', fetchImages)
+    yield takeEvery('ADD_TAG', addTags)
+    
+}
+
+// saga to get images
+function* fetchImages() {
+
+    try {
+        let imageResponse = yield axios.get('/api/image'); 
+        yield put({ type: 'SET_IMAGES', payload: imageResponse.data })
+    } catch(error) {
+        console.log(error)
+    }
+}
+
+// saga to get tags for images
+function* addTags() {
 
 }
+
 
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();
