@@ -28,7 +28,7 @@ componentDidMount() {
         console.log(imagePath)
         return (
                 <div>
-                   <img src ={imagePath[0]} />
+                   <img src ={imagePath[4]} />
                 </div>
         )
     }
