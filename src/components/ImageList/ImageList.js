@@ -1,6 +1,7 @@
 import React, {Component} from 'react'; 
 import { connect } from 'react-redux'; 
 import axios from 'axios';
+import './ImageList.css'
 
 
 
@@ -13,7 +14,7 @@ state = {
 }
 
 componentDidMount() {
-    this.props.dispatch({ type: 'FETCH_IMAGES', payload: this.state})
+    this.props.dispatch({ type: 'FETCH_IMAGES'})
    
 } 
 
@@ -21,13 +22,13 @@ componentDidMount() {
     render() {
         
     let imagePath =  this.props.images.map((image) => {
-                     return  <div key={image.id} image = {image.path}  />
+                     return  image = image.path
             }
                 )
-        console.log(this.props.images)
+        console.log(imagePath)
         return (
                 <div>
-                   {JSON.stringify({imagePath})}
+                   <img src ={imagePath[0]} />
                 </div>
         )
     }
