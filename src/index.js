@@ -15,7 +15,7 @@ import axios from 'axios'
 // Create the rootSaga generator function
 function* rootSaga() {
     yield takeEvery('FETCH_IMAGES', fetchImages)
-    yield takeEvery('ADD_TAG', addTags)
+    yield takeEvery('FETCH_TAGS', addTags)
     
 }
 
@@ -32,6 +32,12 @@ function* fetchImages() {
 
 // saga to get tags for images
 function* addTags() {
+    try {
+        let tagResponse = yield axios.get('/api/tag'); 
+        yield put({ type: 'SET_TAGS', payload: tagResponse.data})
+    } catch(error) {
+        console.log(error)
+    }
 
 }
 
