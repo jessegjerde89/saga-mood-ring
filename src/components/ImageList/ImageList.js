@@ -26,11 +26,11 @@ componentDidMount() {
 
 handleAdd = () => {
     console.log(this.state)
-    this.props.dispatch({type: 'CHANGE_COUNT', payload: this.state.id})
+    this.props.dispatch({type: 'CHANGE_COUNT', payload: this.state.tag})
 }
 
 handleNext = () => {
-    if (this.state.image_spot === 4) {
+    if (this.state.image_spot === 5) {
         this.setState({ 
             image_spot: 0
         })
@@ -55,6 +55,14 @@ handlePrevious = () => {
     })
 }
     console.log(this.state.image_spot)
+}
+
+handleTagChange = (event) => {
+    event.preventDefault() 
+    this.setState({ 
+        tag: event.target.value
+    })
+
 }
 
 
@@ -84,11 +92,11 @@ handlePrevious = () => {
 
                    <button onClick= {this.handlePrevious}>Previous</button>
                    <button onClick={this.handleNext}> Next</button>
-                   <select value={this.state.id} >
+                   <select value={this.state.id} onChange={this.handleTagChange} >
                        <option >Pick an state</option>
                        {this.props.tags.map(tag => {
                             return (
-                       <option>{tag.name}</option>
+                       <option value={}>{tag.name}</option>
                             )})}
                    
                    </select>
