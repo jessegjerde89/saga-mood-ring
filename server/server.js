@@ -6,6 +6,7 @@ const port = process.env.PORT || 5000;
 // Declaring routes 
 const imageRouter = require('./routes/image.router')
 const tagRouter = require('./routes/tag.router')
+const addedTagRouter = require('./routes/addedtag.router')
 
 /** ---------- MIDDLEWARE ---------- **/
 app.use(bodyParser.json()); // needed for angular requests
@@ -15,6 +16,7 @@ app.use(express.static('build'));
 
 app.use('/image', imageRouter)
 app.use('/tag', tagRouter)
+app.use('/images/addedtag', addedTagRouter)
 
 /** ---------- START SERVER ---------- **/
 app.listen(port, function () {

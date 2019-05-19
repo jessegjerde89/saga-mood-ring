@@ -49,7 +49,7 @@ function* fetchTags() {
 function* getTags() {
     try {
     
-        let tagReply = yield axios.get('/image/addtags'); 
+        let tagReply = yield axios.get('/image/addtag'); 
         console.log(tagReply.data)
         yield put({ type: 'GET_IMAGE_TAG', payload: tagReply.data})
     } catch(error) {
@@ -61,7 +61,7 @@ function* getTags() {
 function* addTags(action) { 
     try {
         console.log({image_id: action.payload.images_id, tag_id: action.payload.tag_id})
-        yield axios.post( '/image/addtags', {image_id: action.payload.images_id, tag_id: action.payload.tag_id})
+        yield axios.post( '/image/addtag', {image_id: action.payload.images_id, tag_id: action.payload.tag_id})
             // `/image/addtags?image_id=${action.payload.images_id}&tag_id=${action.payload.tag_id}`); 
             // console.log(action.payload.image_id, action.payload.tag_id)
 
