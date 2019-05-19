@@ -2,60 +2,71 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux'; 
 import axios from 'axios';
 import './ImageList.css'
-
+import Button from '@material-ui/core/Button'
+// import TextField from '@material-ui/core/TextField'
 
 
 class ImageList extends Component {
 
+
+    // setting state 
 state = {
     image_url: '', 
-    tag: 0, 
-    id: 0,
-    image_spot : 0
+    tag: '', 
+    tag_id: 0,
+    image_spot : 1
 
 }
 
-
-
-
+// dispatch action to render images and tags
 componentDidMount() {
     this.props.dispatch({ type: 'FETCH_IMAGES'})
     this.props.dispatch({ type: 'FETCH_TAGS'})
    
 } 
 
+// 
 handleAdd = () => {
+    // map through the tags to get the id
     console.log(this.state)
-    this.props.dispatch({type: 'CHANGE_COUNT', payload: this.state.id})
-}
+    this.props.dispatch({type: 'CHANGE_TAG', payload: this.state})
+} // end handleAdd
 
+
+// handle the next button
 handleNext = () => {
-    if (this.state.image_spot === 4) {
+        // place holder for the images
+        //
+    if (this.state.image_spot === 5) {
         this.setState({ 
-            image_spot: 0
+            image_spot: 1
         })
     } else {
 
     this.setState({ 
         image_spot : (this.state.image_spot + 1)
     })
-}
+} 
     console.log(this.state.image_spot)
-}
+} // end handleNext
 
-
+// handle the previous button
+// setting the state
 handlePrevious = () => {
     if (this.state.image_spot === 0){
-        this.setState({
-            image_spot : 5
-        })
+        this.setState({image_spot : 5})
     } else {
-    this.setState({ 
-        image_spot : (this.state.image_spot - 1)
-    })
+    this.setState({ image_spot : (this.state.image_spot - 1)})
 }
     console.log(this.state.image_spot)
-}
+}// end handlePrevious
+
+
+// handle the tag_id
+handleTagChange = (event) => {
+    
+    this.setState({ tag_id: event.target.value })
+} // end handleTagChange
 
 
     render() {
@@ -69,30 +80,36 @@ handlePrevious = () => {
                      return  image = image.path
             })
 
-    let tagName = this.props.tags.map((tag) => {
-                    return tag = tag.name
-    })
+    // let tagName = this.props.tags.map((tag) => {
+    //                 return tag = tag.name
+    // })
 
     
-        console.log(imagePath)
+        
         return (
                 <div>
                     <h1>{imageName[this.state.image_spot]}</h1>
                    <img src = {imagePath[this.state.image_spot]} />
-                   <p> {tagName} </p>
+                   {/* <p> {tagName} </p> */}
                   
-
-                   <button onClick= {this.handlePrevious}>Previous</button>
-                   <button onClick={this.handleNext}> Next</button>
-                   <select value={this.state.id} >
-                       <option >Pick an state</option>
+                    <div>
+                   <Button type="submit" variant="outlined" color="primary" onClick= {this.handlePrevious}>Previous</Button>
+                   <Button type="submit" variant="outlined" color="primary" onClick={this.handleNext}> Next</Button>
+                   <select value={this.state.id} onChange={this.handleTagChange} >
+                       <option disabled value=" " >Pick an state</option>
                        {this.props.tags.map(tag => {
                             return (
-                       <option>{tag.name}</option>
+                       <option value={tag.id}>{tag.name}</option>
+                    //    <option value={tag.name} value={tag.id}>{tag.name}</option>
                             )})}
                    
                    </select>
-                   <button onClick={this.handleAdd}> Add Tag </button>
+                   <Button type="submit" variant="outlined" color="primary" onClick={this.handleAdd}> Add Tag </Button>
+
+                </div>
+                   <h3>Tags</h3>
+
+                   
                 </div>
         )
     }

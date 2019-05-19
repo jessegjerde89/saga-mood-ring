@@ -20,6 +20,7 @@ function* rootSaga() {
     yield takeEvery('FETCH_TAGS', fetchTags)
     yield takeEvery('ADD_TAGS', addTags)
     
+    
 }
 
 // saga to get images
@@ -28,6 +29,7 @@ function* fetchImages() {
     try {
         let imageResponse = yield axios.get('/api/image'); 
         yield put({ type: 'SET_IMAGES', payload: imageResponse.data })
+        console.log(imageResponse.data)
     } catch(error) {
         console.log(error)
     }
@@ -44,11 +46,10 @@ function* fetchTags() {
 
 }
 
-function* addTags() { 
+function* addTags(action) { 
     try {
         yield axios.post('api/tag', action.payload); 
-        const t
-        yield put({type : 'SET_TAGS', })
+        yield put({type : 'SET_TAGS', payload: action.response})
         } catch(error) {
             console.log(error)
     }
