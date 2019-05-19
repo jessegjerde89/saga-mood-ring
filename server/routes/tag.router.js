@@ -15,9 +15,17 @@ router.get('/', (req, res) => {
 })
 
 router.post(`/`, (req,res) => {
-    console.log('in put tag')
-    const queryText = 'Update ""'
-}) 
+    const queryText = 
+    (`INSERT INTO "images_tags" ("images_id", "tag_id", "tag_name")
+    VALUES (2, 2, 'Calming')`)
+    pool.query(queryText)
+.then( response => {
+    console.log('in put tag', response )
+    res.sendStatus(201); 
+}).catch( error => {
+    res.sendStatus(500); 
+})
+})
 
 
 module.exports = router; 

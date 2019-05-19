@@ -16,7 +16,7 @@ import axios from 'axios'
 function* rootSaga() {
     yield takeEvery('FETCH_IMAGES', fetchImages)
     yield takeEvery('FETCH_TAGS', fetchTags)
-    yield takeEvery('ADD_TAGS', addTags)
+    yield takeEvery('CHANGE_TAGS', addTags)
     
 }
 
@@ -42,10 +42,10 @@ function* fetchTags() {
 
 }
 
-function* fetchTags() { 
+function* addTags(action) { 
     try {
         yield axios.post('api/tag', action.payload); 
-        yield put({type : 'FETCH_TAGS'})
+        yield put({type : 'SET_TAGS', })
         } catch(error) {
             console.log(error)
     }
