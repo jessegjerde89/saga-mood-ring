@@ -31,8 +31,10 @@ router.get('/addtags', (req,res) => {
 
 
 router.post(`/addtags`, (req,res) => {
-    console.log('in post', req.body.images_id, req.body.tag_id)
-    const query = (`INSERT INTO "images_tags" ("images_id", "tag_id") VALUES ($1, $2);`); 
+    console.log('in post', req.body)
+    const query = 
+        `INSERT INTO "images_tags" ("images_id", "tag_id") 
+        VALUES ($1, $2)`; 
     pool.query(query[req.body.images_id, req.body.tag_id])
 .then( result => {
     res.sendStatus(201); 

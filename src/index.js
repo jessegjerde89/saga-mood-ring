@@ -60,8 +60,8 @@ function* getTags() {
 
 function* addTags(action) { 
     try {
-        console.log(action.payload.images_id, action.payload.tag_id)
-        yield axios.post( '/image/addtags', action.payload)
+        console.log({image_id: action.payload.images_id, tag_id: action.payload.tag_id})
+        yield axios.post( '/image/addtags', {image_id: action.payload.images_id, tag_id: action.payload.tag_id})
             // `/image/addtags?image_id=${action.payload.images_id}&tag_id=${action.payload.tag_id}`); 
             // console.log(action.payload.image_id, action.payload.tag_id)
 
