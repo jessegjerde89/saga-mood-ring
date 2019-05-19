@@ -15,7 +15,7 @@ router.get('/', (req, res) => {
 })
 
 
-router.post(`/images/addtags`, (req,res) => {
+router.post(`/addtags`, (req,res) => {
     const queryText = 
     (`INSERT INTO "images_tags" ("images_id", "tag_id")
     VALUES ($1, $2)`)
