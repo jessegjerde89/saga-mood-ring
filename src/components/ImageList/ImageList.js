@@ -8,70 +8,65 @@ import Button from '@material-ui/core/Button'
 
 class ImageList extends Component {
 
+
+    // setting state 
 state = {
     image_url: '', 
     tag: '', 
     tag_id: 0,
-    image_spot : 0
+    image_spot : 1
 
 }
 
-
+// dispatch action to render images and tags
 componentDidMount() {
     this.props.dispatch({ type: 'FETCH_IMAGES'})
     this.props.dispatch({ type: 'FETCH_TAGS'})
    
 } 
 
+// 
 handleAdd = () => {
-
- let tagId  = this.props.tags.map(tag => {
-    return tag = tag.id
-})
-    console.log(tagId)
-    console.log(this.state)
-        this.setState({
-            tag_id:  tagId
-        })
+    // map through the tags to get the id
     console.log(this.state)
     this.props.dispatch({type: 'CHANGE_TAG', payload: this.state})
-}
+} // end handleAdd
 
+
+// handle the next button
 handleNext = () => {
+        // place holder for the images
+        //
     if (this.state.image_spot === 5) {
         this.setState({ 
-            image_spot: 0
+            image_spot: 1
         })
     } else {
 
     this.setState({ 
         image_spot : (this.state.image_spot + 1)
     })
-}
+} 
     console.log(this.state.image_spot)
-}
+} // end handleNext
 
-
+// handle the previous button
+// setting the state
 handlePrevious = () => {
     if (this.state.image_spot === 0){
-        this.setState({
-            image_spot : 5
-        })
+        this.setState({image_spot : 5})
     } else {
-    this.setState({ 
-        image_spot : (this.state.image_spot - 1)
-    })
+    this.setState({ image_spot : (this.state.image_spot - 1)})
 }
     console.log(this.state.image_spot)
-}
+}// end handlePrevious
 
+
+// handle the tag_id
 handleTagChange = (event) => {
     
-    this.setState({ 
-        tag_id: event.target.value
-    })
-    
-}
+    this.setState({ tag_id: event.target.value })
+} // end handleTagChange
 
 
     render() {
@@ -85,9 +80,9 @@ handleTagChange = (event) => {
                      return  image = image.path
             })
 
-    let tagName = this.props.tags.map((tag) => {
-                    return tag = tag.name
-    })
+    // let tagName = this.props.tags.map((tag) => {
+    //                 return tag = tag.name
+    // })
 
     
         
