@@ -12,11 +12,14 @@ import createSagaMiddleware from 'redux-saga';
 import { takeEvery, put } from 'redux-saga/effects'
 import axios from 'axios'
 
+
+
 // Create the rootSaga generator function
 function* rootSaga() {
     yield takeEvery('FETCH_IMAGES', fetchImages)
     yield takeEvery('FETCH_TAGS', fetchTags)
-    yield takeEvery('CHANGE_TAGS', addTags)
+    yield takeEvery('ADD_TAGS', addTags)
+    
     
 }
 
@@ -26,6 +29,7 @@ function* fetchImages() {
     try {
         let imageResponse = yield axios.get('/api/image'); 
         yield put({ type: 'SET_IMAGES', payload: imageResponse.data })
+        console.log(imageResponse.data)
     } catch(error) {
         console.log(error)
     }
@@ -44,8 +48,10 @@ function* fetchTags() {
 
 function* addTags(action) { 
     try {
-        yield axios.post('api/tag', action.payload); 
-        yield put({type : 'SET_TAGS', payload: action.response})
+        yield axios.post(
+            `api/image/addtag?image_id=${action.payload.image_id}&tag_id=${action.payload.tag_id}`); 
+            console.log(action.payload.image_id, action.payload.tag_id)
+        yield put({type : 'FETCH_IMAGES'})
         } catch(error) {
             console.log(error)
     }
