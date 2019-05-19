@@ -26,7 +26,7 @@ componentDidMount() {
 
 handleAdd = () => {
     console.log(this.state)
-    this.props.dispatch({type: 'CHANGE_COUNT', payload: this.state.tag})
+    this.props.dispatch({type: 'CHANGE_TAG', payload: this.state.tag})
 }
 
 handleNext = () => {
@@ -96,7 +96,8 @@ handleTagChange = (event) => {
                        <option >Pick an state</option>
                        {this.props.tags.map(tag => {
                             return (
-                       <option value={}>{tag.name}</option>
+                       <option >{tag.name}</option>
+                    //    <option value={tag.name} value={tag.id}>{tag.name}</option>
                             )})}
                    
                    </select>
