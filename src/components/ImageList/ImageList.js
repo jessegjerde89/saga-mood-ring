@@ -2,20 +2,19 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux'; 
 import axios from 'axios';
 import './ImageList.css'
-
+import Button from '@material-ui/core/Button'
+// import TextField from '@material-ui/core/TextField'
 
 
 class ImageList extends Component {
 
 state = {
     image_url: '', 
-    tag: 0, 
-    id: 0,
+    tag: '', 
+    tag_id: 0,
     image_spot : 0
 
 }
-
-
 
 
 componentDidMount() {
@@ -25,14 +24,23 @@ componentDidMount() {
 } 
 
 handleAdd = () => {
+
+ let tagId  = this.props.tags.map(tag => {
+    return tag = tag.id
+})
+    console.log(tagId)
     console.log(this.state)
-    this.props.dispatch({type: 'CHANGE_TAG', payload: this.state.tag})
+        this.setState({
+            tag_id:  tagId
+        })
+    console.log(this.state)
+    this.props.dispatch({type: 'CHANGE_TAG', payload: this.state})
 }
 
 handleNext = () => {
     if (this.state.image_spot === 5) {
         this.setState({ 
-            image_spot: 1
+            image_spot: 0
         })
     } else {
 
@@ -45,7 +53,7 @@ handleNext = () => {
 
 
 handlePrevious = () => {
-    if (this.state.image_spot === 1){
+    if (this.state.image_spot === 0){
         this.setState({
             image_spot : 5
         })
@@ -60,9 +68,9 @@ handlePrevious = () => {
 handleTagChange = (event) => {
     
     this.setState({ 
-        tag: event.target.value
+        tag_id: event.target.value
     })
-
+    
 }
 
 
@@ -87,21 +95,26 @@ handleTagChange = (event) => {
                 <div>
                     <h1>{imageName[this.state.image_spot]}</h1>
                    <img src = {imagePath[this.state.image_spot]} />
-                   <p> {tagName} </p>
+                   {/* <p> {tagName} </p> */}
                   
-
-                   <button onClick= {this.handlePrevious}>Previous</button>
-                   <button onClick={this.handleNext}> Next</button>
+                    <div>
+                   <Button type="submit" variant="outlined" color="primary" onClick= {this.handlePrevious}>Previous</Button>
+                   <Button type="submit" variant="outlined" color="primary" onClick={this.handleNext}> Next</Button>
                    <select value={this.state.id} onChange={this.handleTagChange} >
-                       <option disabled value="0" >Pick an state</option>
+                       <option disabled value=" " >Pick an state</option>
                        {this.props.tags.map(tag => {
                             return (
-                       <option >{tag.name}</option>
+                       <option value={tag.id}>{tag.name}</option>
                     //    <option value={tag.name} value={tag.id}>{tag.name}</option>
                             )})}
                    
                    </select>
-                   <button onClick={this.handleAdd}> Add Tag </button>
+                   <Button type="submit" variant="outlined" color="primary" onClick={this.handleAdd}> Add Tag </Button>
+
+                </div>
+                   <h3>Tags</h3>
+
+                   
                 </div>
         )
     }

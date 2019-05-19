@@ -26,6 +26,7 @@ function* fetchImages() {
     try {
         let imageResponse = yield axios.get('/api/image'); 
         yield put({ type: 'SET_IMAGES', payload: imageResponse.data })
+        console.log(imageResponse.data)
     } catch(error) {
         console.log(error)
     }
