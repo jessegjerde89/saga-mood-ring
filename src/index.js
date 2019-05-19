@@ -19,7 +19,7 @@ function* rootSaga() {
     yield takeEvery('FETCH_IMAGES', fetchImages)
     yield takeEvery('FETCH_TAGS', fetchTags)
     yield takeEvery('ADD_TAG', addTags)
-    
+    yield takeEvery('GET_TAG', getTags)
     
 }
 
@@ -46,12 +46,22 @@ function* fetchTags() {
 
 }
 
+function* getTags() {
+    try {
+    
+        let tagReply = yield axios.get('/image/addtags'); 
+        yield put({ type: 'SET_TAGS', payload: tagReply.data})
+        console.log(tagReply.data)
+    } catch(error) {
+            console.log(error)
+    }
+}
+
+
 function* addTags(action) { 
     try {
-        console.log(action.payload.image_id, action.payload.tag_id)
-        yield axios.post(
-            '/image/addtags'
-            , action.payload)
+        console.log(action.payload.images_id, action.payload.tag_id)
+        yield axios.post( '/image/addtags', action.payload)
             // `/image/addtags?image_id=${action.payload.images_id}&tag_id=${action.payload.tag_id}`); 
             // console.log(action.payload.image_id, action.payload.tag_id)
 
@@ -60,6 +70,7 @@ function* addTags(action) {
             console.log(error)
     }
 }
+
 
 
 // Create sagaMiddleware
