@@ -85,7 +85,7 @@ handlePrevious = () => {
                    <button onClick= {this.handlePrevious}>Previous</button>
                    <button onClick={this.handleNext}> Next</button>
                    <select value={this.state.id} >
-                       <option disabled value="0">Pick an state</option>
+                       <option >Pick an state</option>
                        {this.props.tags.map(tag => {
                             return (
                        <option>{tag.name}</option>
