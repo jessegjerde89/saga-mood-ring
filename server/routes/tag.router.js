@@ -17,7 +17,7 @@ router.get('/', (req, res) => {
 router.post(`/`, (req,res) => {
     const queryText = 
     (`INSERT INTO "images_tags" ("images_id", "tag_id", "tag_name")
-    VALUES (2, 2, 'Calming')`)
+    VALUES (2, 2, ${req.body})`)
     pool.query(queryText)
 .then( response => {
     console.log('in put tag', response )

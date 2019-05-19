@@ -45,7 +45,7 @@ function* fetchTags() {
 function* addTags(action) { 
     try {
         yield axios.post('api/tag', action.payload); 
-        yield put({type : 'SET_TAGS', })
+        yield put({type : 'SET_TAGS', payload: action.response})
         } catch(error) {
             console.log(error)
     }

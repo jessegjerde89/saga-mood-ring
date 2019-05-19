@@ -58,7 +58,7 @@ handlePrevious = () => {
 }
 
 handleTagChange = (event) => {
-    event.preventDefault() 
+    
     this.setState({ 
         tag: event.target.value
     })
@@ -82,7 +82,7 @@ handleTagChange = (event) => {
     })
 
     
-        console.log(imagePath)
+        
         return (
                 <div>
                     <h1>{imageName[this.state.image_spot]}</h1>
@@ -93,7 +93,7 @@ handleTagChange = (event) => {
                    <button onClick= {this.handlePrevious}>Previous</button>
                    <button onClick={this.handleNext}> Next</button>
                    <select value={this.state.id} onChange={this.handleTagChange} >
-                       <option >Pick an state</option>
+                       <option disabled value="0" >Pick an state</option>
                        {this.props.tags.map(tag => {
                             return (
                        <option >{tag.name}</option>
