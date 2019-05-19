@@ -20,7 +20,7 @@ state = {
 componentDidMount() {
     this.props.dispatch({ type: 'FETCH_IMAGES'})
     this.props.dispatch({ type: 'FETCH_TAGS'})
-    // this.props.dispatch({ type: 'GET_TAGS'})
+    this.props.dispatch({ type: 'GET_TAGS'})
 } 
 
 // 
@@ -28,7 +28,7 @@ handleAdd = () => {
     // map through the tags to get the id
     console.log(this.props)
     this.props.dispatch({type: 'ADD_TAG', payload: this.state})
-    this.props.dispatch({ type: 'GET_TAGS'})
+    
 } // end handleAdd
 
 
@@ -64,29 +64,34 @@ handlePrevious = () => {
 
 
 // handle the tag_id
+// being sure its an integer, not a string 
 handleTagChange = (event) => {
     this.setState({ tag_id: parseInt(event.target.value)})
 } // end handleTagChange
 
-
     render() {
+        // mapping through image title
         let imageName = this.props.images.map((image) => {
             return image = image.title     
         })
-   
+        // mapping through images url
         let imagePath =  this.props.images.map((image) => {
             return image = image.path
         })
 
         return (
                 <div>
+                    {/* Display image and title */}
                     <h1>{imageName[this.state.images_id - 1 ]}</h1>
                    <img src = {imagePath[this.state.images_id - 1 ]} />
                    {/* <p> {tagName} </p> */}
                   
+                  {/* previous & next button  */}
                     <div>
                    <Button type="submit" variant="outlined" color="primary" onClick= {this.handlePrevious}>Previous</Button>
                    <Button type="submit" variant="outlined" color="primary" onClick={this.handleNext}> Next</Button>
+                   
+                     {/* drop down to pick the specific tag */}
                    <select value={this.state.id} onChange={this.handleTagChange} >
                        <option disabled  >Pick an state</option>
                        {this.props.tags.map(tag => {
@@ -95,10 +100,16 @@ handleTagChange = (event) => {
                         )})}
                    
                    </select>
+                    {/* button for adding tag */}
                    <Button type="submit" variant="outlined" color="primary" onClick={this.handleAdd}> Add Tag </Button>
 
                 </div>
                    <h3>Tags</h3>  
+                        {/* <ul>
+                            {this.props.reduxState.addTags.map((tag => {
+                                return <li>tag.name</li>
+                            }))}
+                        </ul> */}
                 </div>
         )
     }
