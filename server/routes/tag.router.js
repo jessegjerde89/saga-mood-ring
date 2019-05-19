@@ -14,10 +14,10 @@ router.get('/', (req, res) => {
     })
 })
 
-// router.post(`/`, (req,res) => {
-//     console.log('in put tag')
-//     const queryText = 'Update ""'
-// }) 
+router.post(`/`, (req,res) => {
+    console.log('in put tag')
+    const queryText = 'Update " "'
+}) 
 
 
 module.exports = router; 
