@@ -12,11 +12,8 @@ class ImageList extends Component {
 
     // setting state 
 state = {
-    image_url: '', 
-    tag: '', 
     tag_id: 0,
-    image_id : 1
-
+    image_id : 1,
 }
 
 // dispatch action to render images and tags
@@ -30,7 +27,7 @@ componentDidMount() {
 handleAdd = () => {
     // map through the tags to get the id
     console.log(this.state)
-    this.props.dispatch({type: 'CHANGE_TAG', payload: this.state})
+    this.props.dispatch({type: 'ADD_TAG', payload: this.state})
 } // end handleAdd
 
 
@@ -55,7 +52,7 @@ handleNext = () => {
 // handle the previous button
 // setting the state
 handlePrevious = () => {
-    console.log(this.state.image_id)
+    console.log(this.state.images_id)
     if (this.state.image_id === 1){
         this.setState({image_id : 5})
     } else {

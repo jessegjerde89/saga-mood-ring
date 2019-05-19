@@ -18,7 +18,7 @@ import axios from 'axios'
 function* rootSaga() {
     yield takeEvery('FETCH_IMAGES', fetchImages)
     yield takeEvery('FETCH_TAGS', fetchTags)
-    yield takeEvery('ADD_TAGS', addTags)
+    yield takeEvery('ADD_TAG', addTags)
     
     
 }
@@ -27,7 +27,7 @@ function* rootSaga() {
 function* fetchImages() {
 
     try {
-        let imageResponse = yield axios.get('/api/image'); 
+        let imageResponse = yield axios.get('/image'); 
         yield put({ type: 'SET_IMAGES', payload: imageResponse.data })
         console.log(imageResponse.data)
     } catch(error) {
@@ -38,7 +38,7 @@ function* fetchImages() {
 // saga to get tags for images
 function* fetchTags() {
     try {
-        let tagResponse = yield axios.get('/api/tag'); 
+        let tagResponse = yield axios.get('/tag'); 
         yield put({ type: 'SET_TAGS', payload: tagResponse.data})
     } catch(error) {
         console.log(error)
@@ -48,9 +48,13 @@ function* fetchTags() {
 
 function* addTags(action) { 
     try {
+        console.log(action.payload.image_id, action.payload.tag_id)
         yield axios.post(
-            `api/image/addtag?image_id=${action.payload.image_id}&tag_id=${action.payload.tag_id}`); 
-            console.log(action.payload.image_id, action.payload.tag_id)
+            '/image/addtags'
+            , action.payload)
+            // `/image/addtags?image_id=${action.payload.images_id}&tag_id=${action.payload.tag_id}`); 
+            // console.log(action.payload.image_id, action.payload.tag_id)
+
         yield put({type : 'FETCH_IMAGES'})
         } catch(error) {
             console.log(error)

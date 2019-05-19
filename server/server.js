@@ -13,8 +13,8 @@ app.use(express.static('build'));
 
 /** ---------- ROUTES ---------- **/
 
-app.use('/api/image', imageRouter)
-app.use('/api/tag', tagRouter)
+app.use('/image', imageRouter)
+app.use('/tag', tagRouter)
 
 /** ---------- START SERVER ---------- **/
 app.listen(port, function () {
