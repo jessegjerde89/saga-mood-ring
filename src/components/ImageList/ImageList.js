@@ -137,10 +137,10 @@ class ImageList extends Component {
                     {/* conditional displaying only tags with the same 
                     id at the image being displayed */}
                     <div className="blue">
-                        {/* {this.props.added_tags.map((tag)=> {
-                    if (tag.images_id === this.state.tag_id) {
-                        console.log(<p>tag.name</p>)
-                    }})} */}
+                        {this.props.added_tags.map((tag)=> {
+                    if (tag.images_id === this.state.images_id) {
+                        return (<p>{tag.name}</p>)
+                    }})} 
                     </div>
                 </body>
             </div>
