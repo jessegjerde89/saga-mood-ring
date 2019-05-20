@@ -16,7 +16,7 @@ app.use(express.static('build'));
 
 app.use('/image', imageRouter)
 app.use('/tag', tagRouter)
-app.use('/images/addedtag', addedTagRouter)
+app.use('/addedtag', addedTagRouter)
 
 /** ---------- START SERVER ---------- **/
 app.listen(port, function () {

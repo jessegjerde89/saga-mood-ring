@@ -49,7 +49,7 @@ function* fetchTags() {
 function* getTags() {
     try {
     
-        let tagReply = yield axios.get('/image/addtag'); 
+        let tagReply = yield axios.get('/addedtag'); 
         console.log(tagReply.data)
         yield put({ type: 'GET_IMAGE_TAG', payload: tagReply.data})
     } catch(error) {
@@ -61,7 +61,7 @@ function* getTags() {
 function* addTags(action) { 
     try {
         console.log({image_id: action.payload.images_id, tag_id: action.payload.tag_id})
-        yield axios.post( '/image/addtag', {image_id: action.payload.images_id, tag_id: action.payload.tag_id})
+        yield axios.post('/addedtag', {image_id: action.payload.images_id, tag_id: action.payload.tag_id})
             // `/image/addtags?image_id=${action.payload.images_id}&tag_id=${action.payload.tag_id}`); 
             // console.log(action.payload.image_id, action.payload.tag_id)
 
@@ -97,9 +97,9 @@ const tags = (state = [], action) => {
 }
 
 const image_tags = (state = [], action ) => {
-    console.log('image_tags,', action.payload)
     switch (action.type) {
         case 'GET_IMAGE_TAG' :
+        console.log('image_tags,', action.payload)
             return action.payload; 
         default: 
             return state; 

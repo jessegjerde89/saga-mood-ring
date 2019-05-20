@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import './ImageList.css'
 import Button from '@material-ui/core/Button'
+import Tags from '../Tags/Tags'
 // import TextField from '@material-ui/core/TextField'
 
 
@@ -20,7 +21,8 @@ state = {
 componentDidMount() {
     this.props.dispatch({ type: 'FETCH_IMAGES'})
     this.props.dispatch({ type: 'FETCH_TAGS'})
-    this.props.dispatch({ type: 'GET_TAGS'})
+    this.props.dispatch({ type: 'GET_TAG'})
+    this.props.dispatch({type: 'ADD_TAG', payload: this.state})
 } 
 
 // 
@@ -79,6 +81,7 @@ handleTagChange = (event) => {
             return image = image.path
         })
 
+
         return (
                 <div>
                     {/* Display image and title */}
@@ -105,11 +108,7 @@ handleTagChange = (event) => {
 
                 </div>
                    <h3>Tags</h3>  
-                        {/* <ul>
-                            {this.props.reduxState.addTags.map((tag => {
-                                return <li>tag.name</li>
-                            }))}
-                        </ul> */}
+                       <Tags />
                 </div>
         )
     }
@@ -118,7 +117,8 @@ handleTagChange = (event) => {
 const mapRedux = (reduxState) => {
     return { 
         images : reduxState.images,
-        tags : reduxState.tags
+        tags : reduxState.tags,
+        added_tags : reduxState.image_tags
     }
 }
 export default connect(mapRedux)(ImageList); 
