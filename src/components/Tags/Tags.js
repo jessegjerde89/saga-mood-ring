@@ -19,13 +19,13 @@ class Tags extends Component {
 
         console.log(this.props.added_tags)
         console.log(this.props.images)
-        console.log(this.props.reduxState)
-        // console.log(imageid)
+        console.log(this.props.tags)
+        console.log(imageid)
         return ( 
             <div>
-            {this.props.reduxState.added_tags.map(tag=> {
+            {this.props.added_tags.map((tag)=> {
                 if (tag.images_id === imageid) {
-                    return (<div>(tag.name)</div>)
+                    return <div>(tag.name)</div>
                 }})}
             </div>
         )

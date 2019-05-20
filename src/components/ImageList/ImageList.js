@@ -5,6 +5,7 @@ import axios from 'axios';
 import './ImageList.css'
 import Button from '@material-ui/core/Button'
 import Tags from '../Tags/Tags'
+
 // import TextField from '@material-ui/core/TextField'
 
 
@@ -82,7 +83,8 @@ handleTagChange = (event) => {
         let imagePath =  this.props.images.map((image) => {
             return image = image.path
         })
-
+        console.log(this.props.added_tags)
+        console.log(this.state.tag_id)
 
         return (
                 <div>
@@ -110,16 +112,26 @@ handleTagChange = (event) => {
 
                 </div>
                    <h3>Tags</h3>  
-                       <Tags />
-                </div>
+                    {/* <Tags /> */}
+
+                    {/* conditional displaying only tags with the same 
+                    id at the image being displayed */}
+                    <div>
+                    {this.props.added_tags.map((tag)=> {
+                    if (tag.images_id === this.state.tag_id) {
+                        console.log(<p>tag.name</p>)
+                    }})}
+            </div>
+        </div>
         )
     }
 }
 
 const mapRedux = (reduxState) => {
     return { 
-        images : reduxState.images,
-        tags : reduxState.tags
+        added_tags: reduxState.image_tags,
+        images: reduxState.images,
+        tags: reduxState.tags
     }
 }
 export default connect(mapRedux)(ImageList); 
