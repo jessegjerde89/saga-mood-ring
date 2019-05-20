@@ -88,16 +88,31 @@ handleTagChange = (event) => {
 
         return (
                 <div>
+                    <head>
                     {/* Display image and title */}
                     <h1>{imageName[this.state.images_id - 1 ]}</h1>
-                   <img src = {imagePath[this.state.images_id - 1 ]} />
+                    </head>
+                   <body>
                    {/* <p> {tagName} </p> */}
                   
                   {/* previous & next button  */}
                     <div>
-                   <Button type="submit" variant="outlined" color="primary" onClick= {this.handlePrevious}>Previous</Button>
-                   <Button type="submit" variant="outlined" color="primary" onClick={this.handleNext}> Next</Button>
-                   
+                   <Button 
+                    className ="tag" 
+                    type="submit" 
+                    variant="outlined" 
+                    color="primary" 
+                    onClick= {this.handlePrevious}>Previous
+                    </Button>
+
+                   <img src = {imagePath[this.state.images_id - 1 ]} />
+                   <Button 
+                    className = "tag2"
+                    type="submit" 
+                    variant="outlined" 
+                    color="primary" 
+                    onClick={this.handleNext}> Next</Button>
+                   <div>
                      {/* drop down to pick the specific tag */}
                    <select value={this.state.id} onChange={this.handleTagChange} >
                        <option disabled  >Pick an state</option>
@@ -108,21 +123,27 @@ handleTagChange = (event) => {
                    
                    </select>
                     {/* button for adding tag */}
-                   <Button type="submit" variant="outlined" color="primary" onClick={this.handleAdd}> Add Tag </Button>
-
+                   <Button 
+                    type="submit" 
+                    variant="outlined" 
+                    color="primary" 
+                    onClick={this.handleAdd}> Add Tag </Button>
+                   </div>
                 </div>
                    <h3>Tags</h3>  
                     {/* <Tags /> */}
 
                     {/* conditional displaying only tags with the same 
                     id at the image being displayed */}
-                    <div>
-                    {this.props.added_tags.map((tag)=> {
+                    <div className = "blue">
+                    {/* {this.props.added_tags.map((tag)=> {
                     if (tag.images_id === this.state.tag_id) {
                         console.log(<p>tag.name</p>)
-                    }})}
+                    }})} */}
             </div>
+            </body>
         </div>
+
         )
     }
 }
