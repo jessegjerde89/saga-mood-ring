@@ -49,6 +49,7 @@ handleNext = () => {
         images_id : (this.state.images_id + 1)
     })
 } 
+this.props.dispatch({ type: 'STATE_REDUCER', payload: this.state.images_id })
     console.log(this.state.images_id)
 } // end handleNext
 
@@ -62,6 +63,7 @@ handlePrevious = () => {
     this.setState({ images_id : (this.state.images_id - 1)})
 }
     console.log(this.state.images_id)
+    this.props.dispatch({ type: 'STATE_REDUCER', payload: this.state.images_id })
 }// end handlePrevious
 
 
@@ -117,8 +119,7 @@ handleTagChange = (event) => {
 const mapRedux = (reduxState) => {
     return { 
         images : reduxState.images,
-        tags : reduxState.tags,
-        added_tags : reduxState.image_tags
+        tags : reduxState.tags
     }
 }
 export default connect(mapRedux)(ImageList); 

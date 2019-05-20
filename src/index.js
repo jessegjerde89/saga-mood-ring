@@ -18,6 +18,7 @@ import axios from 'axios'
 function* rootSaga() {
     yield takeEvery('FETCH_IMAGES', fetchImages)
     yield takeEvery('FETCH_TAGS', fetchTags)
+    yield takeEvery('STATE_REDUCER', stateHolder)
     yield takeEvery('ADD_TAG', addTags)
     yield takeEvery('GET_TAG', getTags)
     
@@ -46,6 +47,14 @@ function* fetchTags() {
 
 }
 
+function* stateHolder() {
+    try {
+        yield put({type: 'STATE' })
+    } catch(error) {
+        console.log(error)
+    }
+}
+
 function* getTags() {
     try {
     
@@ -61,7 +70,8 @@ function* getTags() {
 function* addTags(action) { 
     try {
         console.log({image_id: action.payload.images_id, tag_id: action.payload.tag_id})
-        yield axios.post('/addedtag', {image_id: action.payload.images_id, tag_id: action.payload.tag_id})
+        yield axios.post('/addedtag', action.payload)
+        // {image_id: action.payload.images_id, tag_id: action.payload.tag_id})
             // `/image/addtags?image_id=${action.payload.images_id}&tag_id=${action.payload.tag_id}`); 
             // console.log(action.payload.image_id, action.payload.tag_id)
 
@@ -111,7 +121,8 @@ const storeInstance = createStore(
     combineReducers({
         images,
         tags,
-        image_tags
+        image_tags, 
+
     }),
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),
