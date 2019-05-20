@@ -1,10 +1,10 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import axios from 'axios';
+// import axios from 'axios';
 import './ImageList.css'
 import Button from '@material-ui/core/Button'
-import Tags from '../Tags/Tags'
+// import Tags from '../Tags/Tags'
 
 // import TextField from '@material-ui/core/TextField'
 
@@ -87,11 +87,9 @@ class ImageList extends Component {
         console.log(this.state.tag_id)
 
         return (
-            <div>
-                <head>
+            <>
                     {/* Display image and title */}
                     <h1>{imageName[this.state.images_id - 1]}</h1>
-                </head>
                 <body>
                     {/* <p> {tagName} </p> */}
 
@@ -103,7 +101,7 @@ class ImageList extends Component {
                             variant="outlined"
                             color="primary"
                             onClick={this.handlePrevious}>Previous
-                    </Button>
+                        </Button>
 
                         <img src={imagePath[this.state.images_id - 1]} />
                         <Button
@@ -111,24 +109,25 @@ class ImageList extends Component {
                             type="submit"
                             variant="outlined"
                             color="primary"
-                            onClick={this.handleNext}> Next</Button>
-                        <div>
-                            {/* drop down to pick the specific tag */}
-                            <select value={this.state.id} onChange={this.handleTagChange} >
-                                <option disabled  >Pick an state</option>
-                                {this.props.tags.map(tag => {
-                                    return (
-                                        <option value={tag.id}>{tag.name}</option>
-                                    )
-                                })}
+                            onClick={this.handleNext}> Next
+                        </Button>
+                    <div>
+                        {/* drop down to pick the specific tag */}
+                        <select value={this.state.id} onChange={this.handleTagChange} >
+                            <option disabled  >Pick an state</option>
+                            {this.props.tags.map(tag => {
+                                return (
+                                    <option value={tag.id}>{tag.name}</option>
+                                )
+                            })}
 
-                            </select>
-                            {/* button for adding tag */}
-                            <Button
-                                type="submit"
-                                variant="outlined"
-                                color="primary"
-                                onClick={this.handleAdd}> Add Tag </Button>
+                        </select>
+                        {/* button for adding tag */}
+                        <Button
+                            type="submit"
+                            variant="outlined"
+                            color="primary"
+                            onClick={this.handleAdd}> Add Tag </Button>
                         </div>
                     </div>
                     <h3>Tags</h3>
@@ -143,7 +142,7 @@ class ImageList extends Component {
                     }})} 
                     </div>
                 </body>
-            </div>
+            </>
 
         )
     }

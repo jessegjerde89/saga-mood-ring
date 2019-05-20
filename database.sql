@@ -9,6 +9,15 @@ CREATE TABLE "tags" (
   "name" VARCHAR(80) NOT NULL
 );
 
+CREATE TABLE "images_tags" (
+	"id" SERIAL PRIMARY KEY, 
+	"images_id" INT REFERENCES "images", 
+	"tag_id" INT REFERENCES "tags"
+); 
+
+DROP TABLE "images_tags"; 
+
+
 INSERT INTO "images" ("title", "path")
 VALUES 
 ('Abstract Shapes', 'images/AbstractShapes.jpg'),
@@ -16,6 +25,7 @@ VALUES
 ('Color Burst', 'images/ColorBurst.jpg'),
 ('Flower', 'images/Flower.jpg'),
 ('Reflection', 'images/Reflection.jpg');
+('InkCloud', 'images/InkCloud.jpg'); 
 
 INSERT INTO "tags" ("name")
 VALUES 
@@ -24,3 +34,10 @@ VALUES
 ('Inspirational'),
 ('Frantic'),
 ('Vertigo');
+
+INSERT INTO "images_tags" ("images_id", "tag_id") 
+VALUES 
+(4, 3 ),
+(2, 3 ), 
+(4, 1 ),
+(3, 2 ); 
